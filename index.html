@@ -73,12 +73,89 @@
     .animate-float-4 { animation: float-fade 14s infinite ease-in-out 2s; }
     .animate-float-5 { animation: float-fade 16s infinite ease-in-out 5s; }
 
-    .animate-entry-1 { animation: fade-in-up 0.8s ease-out forwards; opacity: 0; }
-    .animate-entry-2 { animation: fade-in-up 0.8s ease-out 0.2s forwards; opacity: 0; }
-    .animate-entry-3 { animation: fade-in-up 0.8s ease-out 0.4s forwards; opacity: 0; }
-    .animate-entry-4 { animation: fade-in-up 0.8s ease-out 0.6s forwards; opacity: 0; }
-    .animate-entry-5 { animation: fade-in-up 0.8s ease-out 0.8s forwards; opacity: 0; }
-    .animate-entry-6 { animation: fade-in-up 0.8s ease-out 1s forwards; opacity: 0; }
+    .animate-entry-1 { animation: fade-in-up 0.8s ease-out forwards; opacity: 0; animation-play-state: paused; }
+    .animate-entry-2 { animation: fade-in-up 0.8s ease-out 0.2s forwards; opacity: 0; animation-play-state: paused; }
+    .animate-entry-3 { animation: fade-in-up 0.8s ease-out 0.4s forwards; opacity: 0; animation-play-state: paused; }
+    .animate-entry-4 { animation: fade-in-up 0.8s ease-out 0.6s forwards; opacity: 0; animation-play-state: paused; }
+    .animate-entry-5 { animation: fade-in-up 0.8s ease-out 0.8s forwards; opacity: 0; animation-play-state: paused; }
+    .animate-entry-6 { animation: fade-in-up 0.8s ease-out 1s forwards; opacity: 0; animation-play-state: paused; }
+
+    .animate-entry-1.play, .animate-entry-2.play, .animate-entry-3.play, .animate-entry-4.play, .animate-entry-5.play, .animate-entry-6.play { animation-play-state: running; }
+
+    /* Background energy orbs paused until hero visible */
+    .energy-orb, .float-particle, .sparkle, .aurora-wave, .morph-shape {
+      animation-play-state: paused;
+    }
+
+    .skill-bar {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .skill-bar.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-animate {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .scroll-animate-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scroll-animate-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .scroll-animate-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scroll-animate-scale {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-animate-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Background elements - paused until visible */
+    .bg-animate {
+      opacity: 0;
+      transition: opacity 1.5s ease-out;
+    }
+
+    .bg-animate.visible {
+      opacity: 1;
+    }
+
+    .bg-animate .energy-orb,
+    .bg-animate .float-particle,
+    .bg-animate .sparkle,
+    .bg-animate .aurora-wave,
+    .bg-animate .morph-shape {
+      animation-play-state: paused;
+    }
+
+    .bg-animate.visible .energy-orb,
+    .bg-animate.visible .float-particle,
+    .bg-animate.visible .sparkle,
+    .bg-animate.visible .aurora-wave,
+    .bg-animate.visible .morph-shape {
+      animation-play-state: running;
+    }
 
     .skill-bar {
       height: 3px;
@@ -760,8 +837,8 @@
   <div class="absolute inset-0 z-0 bg-mesh opacity-80 pointer-events-none"></div>
   <div class="absolute inset-0 z-0 bg-grid-pattern bg-grid opacity-[0.03] pointer-events-none"></div>
 
-  <!-- Anime-Style Energy Effects -->
-  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+  <!-- Anime-Style Energy Effects - Animated on scroll into hero -->
+  <div id="heroBg" class="bg-animate absolute inset-0 z-0 overflow-hidden pointer-events-none">
     <!-- Energy Orbs -->
     <div class="absolute top-[30%] left-[25%] w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl energy-orb"></div>
     <div class="absolute top-[50%] right-[30%] w-24 h-24 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-2xl energy-orb" style="animation-delay: 2s;"></div>
@@ -919,23 +996,23 @@
   <!-- About Section -->
   <section id="about" class="relative z-10 py-24 px-6 md:px-16">
     <div class="max-w-4xl mx-auto">
-      <div class="glass-card rounded-3xl p-10 md:p-12 holo-card relative overflow-hidden">
+      <div class="glass-card rounded-3xl p-10 md:p-12 holo-card relative overflow-hidden scroll-animate">
         <!-- Scanning Line Effect -->
         <div class="scan-line"></div>
 
-        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-6 block">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-6 block scroll-animate">
           ABOUT
         </span>
 
         <!-- Typing Animation Title -->
-        <div class="mb-8">
+        <div class="mb-8 scroll-animate">
           <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
             <span class="typewriter-text"></span><span class="typing-cursor">|</span>
           </h2>
         </div>
 
         <div class="space-y-8 text-brand-muted leading-relaxed">
-          <p class="about-paragraph text-lg" id="typing-text-1">
+          <p class="about-paragraph text-lg scroll-animate" id="typing-text-1">
             Full-Stack Developer with 14+ years of experience architecting scalable web applications. I specialize in React ecosystems, Node.js backends, and cloud infrastructure on AWS.
           </p>
           <p class="about-paragraph text-lg" id="typing-text-2">
@@ -1038,17 +1115,17 @@
   <section id="stack" class="relative z-10 py-24 px-6 md:px-16">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-12">
-        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block animate-entry-1">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block scroll-animate">
           TECHNICAL INFRASTRUCTURE
         </span>
-        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight animate-entry-2">
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight scroll-animate">
           Core Competencies
         </h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Frontend -->
-        <div class="glass-card rounded-2xl p-8 animate-entry-3">
+        <div class="glass-card rounded-2xl p-8 scroll-animate">
           <h3 class="text-lg font-semibold text-white mb-6">Frontend Engineering</h3>
           <div class="space-y-5">
             <div>
@@ -1083,7 +1160,7 @@
         </div>
 
         <!-- Backend -->
-        <div class="glass-card rounded-2xl p-8 animate-entry-4">
+        <div class="glass-card rounded-2xl p-8 scroll-animate">
           <h3 class="text-lg font-semibold text-white mb-6">Backend & Infrastructure</h3>
           <div class="space-y-5">
             <div>
@@ -1120,22 +1197,22 @@
 
       <!-- Tools Grid -->
       <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mt-6">
-        <div class="glass-card rounded-xl p-4 text-center animate-entry-5">
+        <div class="glass-card rounded-xl p-4 text-center scroll-animate">
           <span class="text-xs font-medium text-brand-muted">Git</span>
         </div>
-        <div class="glass-card rounded-xl p-4 text-center animate-entry-5">
+        <div class="glass-card rounded-xl p-4 text-center scroll-animate">
           <span class="text-xs font-medium text-brand-muted">Figma</span>
         </div>
-        <div class="glass-card rounded-xl p-4 text-center animate-entry-5">
+        <div class="glass-card rounded-xl p-4 text-center scroll-animate">
           <span class="text-xs font-medium text-brand-muted">Vercel</span>
         </div>
-        <div class="glass-card rounded-xl p-4 text-center animate-entry-6">
+        <div class="glass-card rounded-xl p-4 text-center scroll-animate">
           <span class="text-xs font-medium text-brand-muted">Stripe</span>
         </div>
-        <div class="glass-card rounded-xl p-4 text-center animate-entry-6">
+        <div class="glass-card rounded-xl p-4 text-center scroll-animate">
           <span class="text-xs font-medium text-brand-muted">Prisma</span>
         </div>
-        <div class="glass-card rounded-xl p-4 text-center animate-entry-6">
+        <div class="glass-card rounded-xl p-4 text-center scroll-animate">
           <span class="text-xs font-medium text-brand-muted">Redux</span>
         </div>
       </div>
@@ -1146,16 +1223,16 @@
   <section id="projects" class="relative z-10 py-24 px-6 md:px-16">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-12">
-        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block animate-entry-1">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block scroll-animate">
           PROJECT TOPOLOGY
         </span>
-        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight animate-entry-2">
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight scroll-animate">
           Featured Projects
         </h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="glass-card rounded-2xl p-8 animate-entry-3">
+        <div class="glass-card rounded-2xl p-8 scroll-animate">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-semibold text-brand-accent tracking-wider">FULL-STACK</span>
             <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">PRODUCTION</span>
@@ -1173,7 +1250,7 @@
           </div>
         </div>
 
-        <div class="glass-card rounded-2xl p-8 animate-entry-4">
+        <div class="glass-card rounded-2xl p-8 scroll-animate">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-semibold text-brand-accent tracking-wider">REAL-TIME</span>
             <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">PRODUCTION</span>
@@ -1191,7 +1268,7 @@
           </div>
         </div>
 
-        <div class="glass-card rounded-2xl p-8 animate-entry-5">
+        <div class="glass-card rounded-2xl p-8 scroll-animate">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-semibold text-brand-accent tracking-wider">API INTEGRATION</span>
             <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">LIVE</span>
@@ -1209,7 +1286,7 @@
           </div>
         </div>
 
-        <div class="glass-card rounded-2xl p-8 animate-entry-6">
+        <div class="glass-card rounded-2xl p-8 scroll-animate">
           <div class="flex items-center justify-between mb-4">
             <span class="text-xs font-semibold text-brand-accent tracking-wider">SAAS</span>
             <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">BETA</span>
@@ -1234,15 +1311,15 @@
   <section id="contact" class="relative z-10 py-24 px-6 md:px-16">
     <div class="max-w-2xl mx-auto">
       <div class="text-center mb-12">
-        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block animate-entry-1">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block scroll-animate">
           GET IN TOUCH
         </span>
-        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight animate-entry-2">
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight scroll-animate">
           Let's Build Something
         </h2>
       </div>
 
-      <div class="glass-card rounded-2xl p-8 animate-entry-3">
+      <div class="glass-card rounded-2xl p-8 scroll-animate">
         <form class="space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -1265,7 +1342,7 @@
       </div>
 
       <!-- Social Links -->
-      <div class="flex justify-center gap-8 mt-12 animate-entry-4">
+      <div class="flex justify-center gap-8 mt-12 scroll-animate">
         <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">GitHub</a>
         <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">LinkedIn</a>
         <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">Twitter</a>
@@ -1273,7 +1350,7 @@
       </div>
 
       <!-- Footer -->
-      <div class="text-center mt-12 animate-entry-5">
+      <div class="text-center mt-12 scroll-animate">
         <p class="text-xs font-medium text-brand-muted/50 tracking-wider uppercase">© 2026 Ashraful Ahad. All rights reserved.</p>
       </div>
     </div>
@@ -1486,6 +1563,59 @@
         const section = document.getElementById(id);
         if (section) navObserver.observe(section);
       });
+
+      // Scroll-triggered Animations
+      const animateOnScroll = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible', 'play');
+
+            // Trigger child animations with delays
+            const children = entry.target.querySelectorAll('.animate-entry-1, .animate-entry-2, .animate-entry-3, .animate-entry-4, .animate-entry-5, .animate-entry-6');
+            children.forEach(child => {
+              child.classList.add('play');
+            });
+
+            // Trigger skill bars
+            const skillBars = entry.target.querySelectorAll('.skill-bar');
+            skillBars.forEach((bar, index) => {
+              setTimeout(() => {
+                bar.classList.add('visible');
+              }, index * 200);
+            });
+          }
+        });
+      }, { threshold: 0.2 });
+
+      // Observe sections for scroll animations
+      document.querySelectorAll('#hero, #about, #stack, #projects, #contact').forEach(section => {
+        animateOnScroll.observe(section);
+      });
+
+      // Also trigger hero background animations when hero is visible
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const bgElements = document.querySelectorAll('.energy-orb, .float-particle, .sparkle, .aurora-wave, .morph-shape');
+          if (entry.isIntersecting) {
+            bgElements.forEach(el => {
+              el.style.animationPlayState = 'running';
+            });
+            // Also trigger hero text animations
+            document.querySelectorAll('.animate-entry-1, .animate-entry-2, .animate-entry-3, .animate-entry-4').forEach(el => {
+              el.classList.add('play');
+            });
+          } else {
+            bgElements.forEach(el => {
+              el.style.animationPlayState = 'paused';
+            });
+          }
+        });
+      }, { threshold: 0.1 });
+
+      const heroSection = document.getElementById('hero');
+      if (heroSection) {
+        heroObserver.observe(heroSection.closest('main') || heroSection);
+      }
     });
   </script>
 </body>
