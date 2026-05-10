@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Ashraful Ahad - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#0a0a0d',
+              charcoal: '#111116',
+              indigo: '#1a1a2e',
+              accent: '#3b82f6',
+              text: '#e2e8f0',
+              muted: '#94a3b8'
+            }
+          },
+          backgroundImage: {
+            'mesh': 'radial-gradient(at 40% 20%, hsla(240,60%,15%,1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(220,50%,10%,1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(260,40%,12%,1) 0px, transparent 50%)',
+            'grid-pattern': 'linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    body {
+      background-color: #0a0a0d;
+      color: #e2e8f0;
+    }
+
+    .bg-grid {
+      background-size: 40px 40px;
+      mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    }
+
+    .glass-card {
+      background: rgba(17, 17, 22, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes float-fade {
+      0%, 100% { opacity: 0; transform: translateY(0) scale(0.95); }
+      50% { opacity: 0.15; transform: translateY(-20px) scale(1.05); }
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fade-in-scale {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-float-1 { animation: float-fade 12s infinite ease-in-out; }
+    .animate-float-2 { animation: float-fade 15s infinite ease-in-out 3s; }
+    .animate-float-3 { animation: float-fade 18s infinite ease-in-out 7s; }
+    .animate-float-4 { animation: float-fade 14s infinite ease-in-out 2s; }
+    .animate-float-5 { animation: float-fade 16s infinite ease-in-out 5s; }
+
+    .animate-entry-1 { animation: fade-in-up 0.8s ease-out forwards; opacity: 0; }
+    .animate-entry-2 { animation: fade-in-up 0.8s ease-out 0.2s forwards; opacity: 0; }
+    .animate-entry-3 { animation: fade-in-up 0.8s ease-out 0.4s forwards; opacity: 0; }
+    .animate-entry-4 { animation: fade-in-up 0.8s ease-out 0.6s forwards; opacity: 0; }
+    .animate-entry-5 { animation: fade-in-up 0.8s ease-out 0.8s forwards; opacity: 0; }
+    .animate-entry-6 { animation: fade-in-up 0.8s ease-out 1s forwards; opacity: 0; }
+
+    .skill-bar {
+      height: 3px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      border-radius: 2px;
+      transform-origin: left;
+      animation: fill-bar 1.5s ease-out forwards;
+    }
+
+    @keyframes fill-bar {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes count-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slide-in-left {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slide-in-right {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scale-in {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0); }
+      50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); }
+    }
+
+    .counter-animate {
+      animation: count-up 0.6s ease-out forwards;
+    }
+
+    .slide-left {
+      animation: slide-in-left 0.8s ease-out forwards;
+    }
+
+    .slide-right {
+      animation: slide-in-right 0.8s ease-out forwards;
+    }
+
+    .stat-card {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .stat-card.visible {
+      animation: count-up 0.6s ease-out forwards;
+    }
+
+    .about-paragraph {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .about-paragraph.visible {
+      animation: count-up 0.8s ease-out forwards;
+    }
+
+    .about-title {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .about-title.visible {
+      animation: count-up 0.8s ease-out 0.2s forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col font-sans">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 z-0 bg-mesh opacity-80 pointer-events-none"></div>
+  <div class="absolute inset-0 z-0 bg-grid-pattern bg-grid opacity-[0.03] pointer-events-none"></div>
+
+  <!-- Dynamic Floating Background Elements -->
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <!-- Code Snippets -->
+    <div class="absolute top-[20%] left-[15%] text-brand-accent font-mono text-xl animate-float-1 opacity-0">{ ... }</div>
+    <div class="absolute top-[70%] right-[20%] text-brand-muted font-mono text-2xl animate-float-2 opacity-0">&lt;/&gt;</div>
+    <div class="absolute top-[45%] left-[5%] text-white font-mono text-sm animate-float-3 opacity-0">function init()</div>
+    <div class="absolute bottom-[25%] left-[30%] text-brand-accent font-mono text-3xl animate-float-4 opacity-0">() =&gt;</div>
+    <div class="absolute top-[15%] right-[10%] text-white font-mono text-lg animate-float-2 opacity-0">const dev = true;</div>
+    <div class="absolute bottom-[15%] right-[25%] text-brand-muted font-mono text-xl animate-float-5 opacity-0">async/await</div>
+    <div class="absolute top-[55%] right-[8%] text-brand-accent font-mono text-lg animate-float-1 opacity-0">import React</div>
+
+    <!-- Geometric Shapes -->
+    <svg class="absolute top-[35%] right-[30%] w-16 h-16 text-brand-muted animate-float-5 opacity-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><polygon points="12 2 2 22 22 22"></polygon></svg>
+    <svg class="absolute bottom-[35%] right-[15%] w-24 h-24 text-brand-accent animate-float-1 opacity-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+    <svg class="absolute top-[60%] left-[25%] w-12 h-12 text-brand-muted animate-float-4 opacity-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+    <svg class="absolute bottom-[50%] left-[10%] w-20 h-20 text-brand-accent animate-float-3 opacity-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect></svg>
+    <svg class="absolute top-[25%] left-[40%] w-10 h-10 text-brand-muted animate-float-2 opacity-0" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+  </div>
+
+  <!-- Header -->
+  <header class="relative z-10 w-full py-6 px-8 md:px-16 flex items-center justify-between border-b border-white/5 bg-brand-charcoal/50 backdrop-blur-md">
+    <a class="text-xl font-bold tracking-tight text-white hover:text-brand-accent transition-colors" href="#">
+      Ashraful Ahad
+    </a>
+    <nav class="hidden md:flex items-center space-x-8">
+      <a class="text-sm font-medium text-white tracking-wider hover:text-brand-accent transition-colors" href="#hero">HOME</a>
+      <a class="text-sm font-medium text-brand-muted tracking-wider hover:text-white transition-colors" href="#about">ABOUT</a>
+      <a class="text-sm font-medium text-brand-muted tracking-wider hover:text-white transition-colors" href="#stack">STACK</a>
+      <a class="text-sm font-medium text-brand-muted tracking-wider hover:text-white transition-colors" href="#projects">PROJECTS</a>
+      <a class="text-sm font-medium text-brand-muted tracking-wider hover:text-white transition-colors" href="#contact">CONTACT</a>
+    </nav>
+    <button class="md:hidden text-brand-muted hover:text-white focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative z-10 flex-grow flex items-center justify-center p-6 md:p-12">
+    <!-- Hero Card -->
+    <div id="hero" class="glass-card rounded-3xl p-10 md:p-16 max-w-3xl w-full text-center flex flex-col items-center">
+      <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-6 block animate-entry-1">
+        FULL-STACK DEVELOPER & UI DESIGNER
+      </span>
+      <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 animate-entry-2">
+        Ashraful Ahad
+      </h1>
+      <p class="text-lg md:text-xl text-brand-muted max-w-2xl leading-relaxed mb-10 animate-entry-3">
+        Building robust digital infrastructure with clean code and intuitive design.
+        Focused on performance, scalability, and user experience.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-entry-4">
+        <a class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-[#1e293b] border border-[#334155] rounded-lg hover:bg-[#334155] transition-colors duration-200" href="#contact">
+          Get in Touch
+        </a>
+        <a class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-brand-muted bg-transparent border border-[#1e293b] rounded-lg hover:text-white hover:border-[#334155] hover:bg-[#1e293b]/50 transition-all duration-200" href="#projects">
+          View Projects
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- About Section -->
+  <section id="about" class="relative z-10 py-24 px-6 md:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="glass-card rounded-3xl p-10 md:p-12">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-6 block animate-entry-1">
+          ABOUT
+        </span>
+        <h2 class="about-title text-3xl md:text-4xl font-bold text-white tracking-tight mb-8">
+          Building the Future of Digital Products
+        </h2>
+        <div class="space-y-6 text-brand-muted leading-relaxed">
+          <p class="about-paragraph" style="animation-delay: 0.3s">
+            Full-Stack Developer with 14+ years of experience architecting scalable web applications.
+            I specialize in React ecosystems, Node.js backends, and cloud infrastructure on AWS.
+          </p>
+          <p class="about-paragraph" style="animation-delay: 0.5s">
+            Previously led engineering teams at fintech startups, building high-traffic platforms
+            serving millions of users. Now focused on consulting and building products that matter.
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+          <div class="stat-card glass-card rounded-xl p-6 text-center cursor-default hover:border-brand-accent/30 transition-all duration-300" data-target="14" data-suffix="+">
+            <div class="text-4xl md:text-5xl font-bold text-white mb-2 counter">0</div>
+            <div class="text-xs font-medium text-brand-muted tracking-wider uppercase">Years Exp.</div>
+          </div>
+          <div class="stat-card glass-card rounded-xl p-6 text-center cursor-default hover:border-brand-accent/30 transition-all duration-300" data-target="50" data-suffix="+">
+            <div class="text-4xl md:text-5xl font-bold text-white mb-2 counter">0</div>
+            <div class="text-xs font-medium text-brand-muted tracking-wider uppercase">Projects</div>
+          </div>
+          <div class="stat-card glass-card rounded-xl p-6 text-center cursor-default hover:border-brand-accent/30 transition-all duration-300" data-target="35" data-suffix="+">
+            <div class="text-4xl md:text-5xl font-bold text-white mb-2 counter">0</div>
+            <div class="text-xs font-medium text-brand-muted tracking-wider uppercase">Clients</div>
+          </div>
+          <div class="stat-card glass-card rounded-xl p-6 text-center cursor-default hover:border-brand-accent/30 transition-all duration-300" data-target="1500" data-suffix="+">
+            <div class="text-4xl md:text-5xl font-bold text-white mb-2 counter">0</div>
+            <div class="text-xs font-medium text-brand-muted tracking-wider uppercase">Reviews</div>
+          </div>
+        </div>
+
+        <!-- Additional Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div class="slide-left glass-card rounded-xl p-6 border-l-2 border-l-brand-accent">
+            <h3 class="text-lg font-semibold text-white mb-3">What I Do</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              I transform complex problems into elegant, user-friendly solutions. From concept to deployment,
+              I deliver high-quality code that scales and performs at the highest level.
+            </p>
+          </div>
+          <div class="slide-right glass-card rounded-xl p-6 border-l-2 border-l-brand-accent">
+            <h3 class="text-lg font-semibold text-white mb-3">My Approach</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              Clean architecture, scalable infrastructure, and pixel-perfect interfaces.
+              I believe in writing code that's not just functional, but maintainable and beautiful.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Trigger counter animation for stat cards
+          if (entry.target.classList.contains('stat-card')) {
+            const counter = entry.target.querySelector('.counter');
+            if (counter && counter.textContent === '0') {
+              const target = parseInt(entry.target.dataset.target);
+              const suffix = entry.target.dataset.suffix || '';
+              animateCounter(counter, target, suffix);
+            }
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe stat cards
+    document.querySelectorAll('.stat-card, .about-paragraph, .about-title, .slide-left, .slide-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Counter animation function
+    function animateCounter(element, target, suffix) {
+      const duration = 2000;
+      const steps = 60;
+      const increment = target / steps;
+      let current = 0;
+      const stepDuration = duration / steps;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current) + suffix;
+        }
+      }, stepDuration);
+    }
+  </script>
+
+  <!-- Stack Section -->
+  <section id="stack" class="relative z-10 py-24 px-6 md:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block animate-entry-1">
+          TECHNICAL INFRASTRUCTURE
+        </span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight animate-entry-2">
+          Core Competencies
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Frontend -->
+        <div class="glass-card rounded-2xl p-8 animate-entry-3">
+          <h3 class="text-lg font-semibold text-white mb-6">Frontend Engineering</h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">React / Next.js</span>
+                <span class="text-sm text-brand-muted">95%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">TypeScript</span>
+                <span class="text-sm text-brand-muted">88%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 88%; animation-delay: 0.2s"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">Tailwind CSS</span>
+                <span class="text-sm text-brand-muted">92%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 92%; animation-delay: 0.4s"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">Performance</span>
+                <span class="text-sm text-brand-muted">85%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 85%; animation-delay: 0.6s"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="glass-card rounded-2xl p-8 animate-entry-4">
+          <h3 class="text-lg font-semibold text-white mb-6">Backend & Infrastructure</h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">Node.js / Express</span>
+                <span class="text-sm text-brand-muted">90%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">PostgreSQL / Redis</span>
+                <span class="text-sm text-brand-muted">78%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 78%; animation-delay: 0.2s"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">AWS / Docker</span>
+                <span class="text-sm text-brand-muted">82%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 82%; animation-delay: 0.4s"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="text-sm text-brand-muted">API Design / GraphQL</span>
+                <span class="text-sm text-brand-muted">88%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 88%; animation-delay: 0.6s"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Grid -->
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mt-6">
+        <div class="glass-card rounded-xl p-4 text-center animate-entry-5">
+          <span class="text-xs font-medium text-brand-muted">Git</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-entry-5">
+          <span class="text-xs font-medium text-brand-muted">Figma</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-entry-5">
+          <span class="text-xs font-medium text-brand-muted">Vercel</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-entry-6">
+          <span class="text-xs font-medium text-brand-muted">Stripe</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-entry-6">
+          <span class="text-xs font-medium text-brand-muted">Prisma</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-entry-6">
+          <span class="text-xs font-medium text-brand-muted">Redux</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="relative z-10 py-24 px-6 md:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block animate-entry-1">
+          PROJECT TOPOLOGY
+        </span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight animate-entry-2">
+          Featured Projects
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass-card rounded-2xl p-8 animate-entry-3">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-semibold text-brand-accent tracking-wider">FULL-STACK</span>
+            <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">PRODUCTION</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">E-Commerce Platform</h3>
+          <p class="text-sm text-brand-muted mb-4">Full-stack online shop with payment integration, inventory management, and admin dashboard.</p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">React</span>
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">Node.js</span>
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">PostgreSQL</span>
+          </div>
+          <div class="flex gap-4">
+            <a href="#" class="text-sm font-medium text-brand-accent hover:text-white transition-colors">Live Demo →</a>
+            <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">Source</a>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8 animate-entry-4">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-semibold text-brand-accent tracking-wider">REAL-TIME</span>
+            <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">PRODUCTION</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Task Management App</h3>
+          <p class="text-sm text-brand-muted mb-4">Real-time team collaboration tool with drag-and-drop boards, comments, and notifications.</p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">Vue.js</span>
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">Firebase</span>
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">Tailwind</span>
+          </div>
+          <div class="flex gap-4">
+            <a href="#" class="text-sm font-medium text-brand-accent hover:text-white transition-colors">Live Demo →</a>
+            <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">Source</a>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8 animate-entry-5">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-semibold text-brand-accent tracking-wider">API INTEGRATION</span>
+            <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">LIVE</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Weather Dashboard</h3>
+          <p class="text-sm text-brand-muted mb-4">Beautiful weather app with 7-day forecasts, interactive maps, and location-based alerts.</p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">JavaScript</span>
+            <span class="text-xs font-mono text-brand-muted/30 px-2 py-1 rounded">REST API</span>
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">D3.js</span>
+          </div>
+          <div class="flex gap-4">
+            <a href="#" class="text-sm font-medium text-brand-accent hover:text-white transition-colors">Live Demo →</a>
+            <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">Source</a>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8 animate-entry-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-semibold text-brand-accent tracking-wider">SAAS</span>
+            <span class="text-xs font-medium text-brand-muted px-2 py-1 rounded border border-brand-muted/30">BETA</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Portfolio Generator</h3>
+          <p class="text-sm text-brand-muted mb-4">SaaS tool that helps developers create stunning portfolios with customizable templates.</p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">Next.js</span>
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">Prisma</span>
+            <span class="text-xs font-mono text-brand-muted/70 bg-brand-indigo/30 px-2 py-1 rounded">Vercel</span>
+          </div>
+          <div class="flex gap-4">
+            <a href="#" class="text-sm font-medium text-brand-accent hover:text-white transition-colors">Live Demo →</a>
+            <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">Source</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="relative z-10 py-24 px-6 md:px-16">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-4 block animate-entry-1">
+          GET IN TOUCH
+        </span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight animate-entry-2">
+          Let's Build Something
+        </h2>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8 animate-entry-3">
+        <form class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="text-xs font-medium text-brand-muted tracking-wider uppercase mb-2 block">Name</label>
+              <input type="text" required placeholder="Your name" class="w-full px-4 py-3 bg-brand-charcoal/50 border border-white/10 rounded-lg text-white placeholder-brand-muted/40 focus:outline-none focus:border-brand-accent/50 focus:ring-1 focus:ring-brand-accent/20 transition-all">
+            </div>
+            <div>
+              <label class="text-xs font-medium text-brand-muted tracking-wider uppercase mb-2 block">Email</label>
+              <input type="email" required placeholder="you@company.com" class="w-full px-4 py-3 bg-brand-charcoal/50 border border-white/10 rounded-lg text-white placeholder-brand-muted/40 focus:outline-none focus:border-brand-accent/50 focus:ring-1 focus:ring-brand-accent/20 transition-all">
+            </div>
+          </div>
+          <div>
+            <label class="text-xs font-medium text-brand-muted tracking-wider uppercase mb-2 block">Message</label>
+            <textarea required rows="5" placeholder="Tell me about your project..." class="w-full px-4 py-3 bg-brand-charcoal/50 border border-white/10 rounded-lg text-white placeholder-brand-muted/40 focus:outline-none focus:border-brand-accent/50 focus:ring-1 focus:ring-brand-accent/20 transition-all resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full py-4 bg-[#1e293b] border border-[#334155] rounded-lg text-white font-medium hover:bg-[#334155] transition-colors duration-200">
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Social Links -->
+      <div class="flex justify-center gap-8 mt-12 animate-entry-4">
+        <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">GitHub</a>
+        <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">LinkedIn</a>
+        <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">Twitter</a>
+        <a href="#" class="text-sm font-medium text-brand-muted hover:text-white transition-colors">Email</a>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center mt-12 animate-entry-5">
+        <p class="text-xs font-medium text-brand-muted/50 tracking-wider uppercase">© 2026 Ashraful Ahad. All rights reserved.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
