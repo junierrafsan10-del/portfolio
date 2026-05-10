@@ -86,23 +86,11 @@
     }
 
     .skill-bar {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .skill-bar.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
     .scroll-animate {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .scroll-animate.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -115,57 +103,19 @@
       overflow-y: auto !important;
     }
 
-    .scroll-animate-left.visible {
+    .scroll-animate-left {
       opacity: 1;
       transform: translateX(0);
     }
 
     .scroll-animate-right {
-      opacity: 0;
-      transform: translateX(50px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .scroll-animate-right.visible {
       opacity: 1;
       transform: translateX(0);
     }
 
     .scroll-animate-scale {
-      opacity: 0;
-      transform: scale(0.8);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-
-    .scroll-animate-scale.visible {
       opacity: 1;
       transform: scale(1);
-    }
-
-    /* Background elements - paused until visible */
-    .bg-animate {
-      opacity: 0;
-      transition: opacity 1.5s ease-out;
-    }
-
-    .bg-animate.visible {
-      opacity: 1;
-    }
-
-    .bg-animate .energy-orb,
-    .bg-animate .float-particle,
-    .bg-animate .sparkle,
-    .bg-animate .aurora-wave,
-    .bg-animate .morph-shape {
-      animation-play-state: paused;
-    }
-
-    .bg-animate.visible .energy-orb,
-    .bg-animate.visible .float-particle,
-    .bg-animate.visible .sparkle,
-    .bg-animate.visible .aurora-wave,
-    .bg-animate.visible .morph-shape {
-      animation-play-state: running;
     }
 
     .skill-bar {
