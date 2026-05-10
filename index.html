@@ -455,9 +455,307 @@
     .about-title.visible {
       animation: count-up 0.8s ease-out 0.2s forwards;
     }
+
+    /* Cursor Trail Effect */
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+    }
+
+    .cursor-trail.active {
+      animation: trail-fade 0.8s ease-out forwards;
+    }
+
+    @keyframes trail-fade {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+    }
+
+    /* Glitch Effect */
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch-text:hover {
+      animation: glitch 0.3s ease-in-out;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    .glitch-text:hover::before {
+      animation: glitch-1 0.3s ease-in-out;
+      color: #ff0080;
+      left: 2px;
+    }
+
+    .glitch-text:hover::after {
+      animation: glitch-2 0.3s ease-in-out;
+      color: #00ffff;
+      left: -2px;
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+    }
+
+    @keyframes glitch-1 {
+      0%, 100% { opacity: 0; }
+      20%, 60% { opacity: 0.8; transform: translate(-2px, 0); }
+      40%, 80% { opacity: 0; transform: translate(2px, 0); }
+    }
+
+    @keyframes glitch-2 {
+      0%, 100% { opacity: 0; }
+      20%, 60% { opacity: 0.8; transform: translate(2px, 0); }
+      40%, 80% { opacity: 0; transform: translate(-2px, 0); }
+    }
+
+    /* Parallax Shapes */
+    .parallax-shape {
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Animated Section Divider */
+    .section-divider {
+      position: relative;
+      height: 2px;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+      animation: divider-shine 3s ease-in-out infinite;
+    }
+
+    @keyframes divider-shine {
+      0% { left: -100%; }
+      50% { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    /* Navigation Progress Dots */
+    .nav-progress {
+      position: fixed;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-dot::before {
+      content: attr(data-label);
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.4);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .nav-dot:hover::before {
+      opacity: 1;
+    }
+
+    .nav-dot:hover {
+      background: rgba(59, 130, 246, 0.5);
+      border-color: rgba(59, 130, 246, 0.8);
+      transform: scale(1.2);
+    }
+
+    .nav-dot.active {
+      background: #3b82f6;
+      border-color: #60a5fa;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Glowing CTA Buttons */
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: all 0.5s ease;
+    }
+
+    .btn-glow:hover::before {
+      width: 300%;
+      height: 300%;
+    }
+
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), transparent, rgba(168, 85, 247, 0.5));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-glow:hover::after {
+      opacity: 1;
+      animation: border-rotate 1s linear infinite;
+    }
+
+    @keyframes border-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Pulse Ring Effect */
+    .pulse-ring {
+      position: relative;
+    }
+
+    .pulse-ring::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: inherit;
+      border: 2px solid transparent;
+      animation: pulse-expand 2s ease-out infinite;
+    }
+
+    @keyframes pulse-expand {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.3); }
+    }
+
+    /* Scanning Line Effect */
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+      animation: scan 4s ease-in-out infinite;
+    }
+
+    @keyframes scan {
+      0% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    /* Holographic Card Effect */
+    .holo-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .holo-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(59, 130, 246, 0.1) 45%,
+        rgba(168, 85, 247, 0.1) 50%,
+        rgba(59, 130, 246, 0.1) 55%,
+        transparent 60%
+      );
+      animation: holo-shift 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes holo-shift {
+      0%, 100% { transform: translateX(-10%) translateY(-10%); }
+      50% { transform: translateX(10%) translateY(10%); }
+    }
+
+    /* Floating Skill Icons */
+    .skill-icon {
+      animation: skill-float 6s ease-in-out infinite;
+    }
+
+    @keyframes skill-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-8px) rotate(2deg); }
+      75% { transform: translateY(8px) rotate(-2deg); }
+    }
   </style>
 </head>
 <body class="min-h-screen relative flex flex-col font-sans">
+  <!-- Cursor Trail Container -->
+  <div id="cursorTrail" class="cursor-trail"></div>
+
+  <!-- Navigation Progress Dots -->
+  <nav class="nav-progress">
+    <a href="#hero" class="nav-dot active" data-label="Home"></a>
+    <a href="#about" class="nav-dot" data-label="About"></a>
+    <a href="#stack" class="nav-dot" data-label="Stack"></a>
+    <a href="#projects" class="nav-dot" data-label="Projects"></a>
+    <a href="#contact" class="nav-dot" data-label="Contact"></a>
+  </nav>
+
   <!-- Background Elements -->
   <div class="absolute inset-0 z-0 bg-mesh opacity-80 pointer-events-none"></div>
   <div class="absolute inset-0 z-0 bg-grid-pattern bg-grid opacity-[0.03] pointer-events-none"></div>
@@ -474,13 +772,13 @@
     <div class="absolute top-0 right-0 w-1/2 h-96 bg-gradient-to-bl from-cyan-500/10 via-transparent aurora-wave" style="animation-delay: 3s;"></div>
 
     <!-- Floating Particles -->
-    <div class="absolute top-[15%] left-[20%] w-2 h-2 rounded-full bg-brand-accent/60 float-particle"></div>
-    <div class="absolute top-[35%] right-[15%] w-3 h-3 rounded-full bg-purple-500/50 float-particle" style="animation-delay: 1s;"></div>
-    <div class="absolute top-[60%] left-[10%] w-2 h-2 rounded-full bg-cyan-400/50 float-particle" style="animation-delay: 2s;"></div>
-    <div class="absolute top-[75%] right-[25%] w-2 h-2 rounded-full bg-pink-400/50 float-particle" style="animation-delay: 3s;"></div>
-    <div class="absolute top-[45%] left-[35%] w-1.5 h-1.5 rounded-full bg-white/60 float-particle" style="animation-delay: 1.5s;"></div>
-    <div class="absolute bottom-[20%] left-[25%] w-2.5 h-2.5 rounded-full bg-blue-400/40 float-particle" style="animation-delay: 4s;"></div>
-    <div class="absolute top-[25%] right-[35%] w-1.5 h-1.5 rounded-full bg-purple-300/50 float-particle" style="animation-delay: 2.5s;"></div>
+    <div class="absolute top-[15%] left-[20%] w-2 h-2 rounded-full bg-brand-accent/60 float-particle parallax-shape" data-speed="0.02"></div>
+    <div class="absolute top-[35%] right-[15%] w-3 h-3 rounded-full bg-purple-500/50 float-particle parallax-shape" style="animation-delay: 1s;" data-speed="0.04"></div>
+    <div class="absolute top-[60%] left-[10%] w-2 h-2 rounded-full bg-cyan-400/50 float-particle parallax-shape" style="animation-delay: 2s;" data-speed="0.03"></div>
+    <div class="absolute top-[75%] right-[25%] w-2 h-2 rounded-full bg-pink-400/50 float-particle parallax-shape" style="animation-delay: 3s;" data-speed="0.05"></div>
+    <div class="absolute top-[45%] left-[35%] w-1.5 h-1.5 rounded-full bg-white/60 float-particle parallax-shape" style="animation-delay: 1.5s;" data-speed="0.025"></div>
+    <div class="absolute bottom-[20%] left-[25%] w-2.5 h-2.5 rounded-full bg-blue-400/40 float-particle parallax-shape" style="animation-delay: 4s;" data-speed="0.035"></div>
+    <div class="absolute top-[25%] right-[35%] w-1.5 h-1.5 rounded-full bg-purple-300/50 float-particle parallax-shape" style="animation-delay: 2.5s;" data-speed="0.045"></div>
 
     <!-- Sparkles -->
     <div class="absolute top-[20%] left-[30%] w-1 h-1 bg-white rounded-full sparkle" style="animation-delay: 0.5s;"></div>
@@ -598,7 +896,7 @@
           <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-6 block animate-entry-1 relative z-10">
             FULL-STACK DEVELOPER & UI DESIGNER
           </span>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 animate-entry-2 text-glow relative z-10">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 animate-entry-2 text-glow glitch-text relative z-10" data-text="Ashraful Ahad">
             Ashraful Ahad
           </h1>
           <p class="text-lg text-brand-muted leading-relaxed mb-8 animate-entry-3 relative z-10">
@@ -606,10 +904,10 @@
             Focused on performance, scalability, and user experience.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 animate-entry-4 relative z-10">
-            <a class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-gradient-to-r from-[#1e293b] to-[#0f172a] border border-brand-accent/30 rounded-lg hover:border-brand-accent/60 hover:shadow-lg hover:shadow-brand-accent/20 transition-all duration-300" href="#contact">
+            <a class="btn-glow inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-gradient-to-r from-[#1e293b] to-[#0f172a] border border-brand-accent/30 rounded-lg hover:border-brand-accent/60 hover:shadow-lg hover:shadow-brand-accent/20 transition-all duration-300" href="#contact">
               Get in Touch
             </a>
-            <a class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-brand-muted bg-transparent border border-[#1e293b] rounded-lg hover:text-white hover:border-brand-accent/30 hover:bg-brand-accent/5 transition-all duration-300" href="#projects">
+            <a class="btn-glow inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-brand-muted bg-transparent border border-[#1e293b] rounded-lg hover:text-white hover:border-brand-accent/30 hover:bg-brand-accent/5 transition-all duration-300" href="#projects">
               View Projects
             </a>
           </div>
@@ -621,7 +919,10 @@
   <!-- About Section -->
   <section id="about" class="relative z-10 py-24 px-6 md:px-16">
     <div class="max-w-4xl mx-auto">
-      <div class="glass-card rounded-3xl p-10 md:p-12">
+      <div class="glass-card rounded-3xl p-10 md:p-12 holo-card relative overflow-hidden">
+        <!-- Scanning Line Effect -->
+        <div class="scan-line"></div>
+
         <span class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-muted uppercase mb-6 block">
           ABOUT
         </span>
@@ -1124,6 +1425,66 @@
             block: 'start'
           });
         }
+      });
+
+      // Cursor Trail Effect
+      const cursorTrail = document.getElementById('cursorTrail');
+      let lastTrailTime = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastTrailTime > 30) {
+          lastTrailTime = now;
+
+          const trail = cursorTrail.cloneNode();
+          trail.classList.add('active');
+          trail.style.left = e.clientX + 'px';
+          trail.style.top = e.clientY + 'px';
+          document.body.appendChild(trail);
+
+          setTimeout(() => {
+            trail.remove();
+          }, 800);
+        }
+      });
+
+      // Parallax Effect
+      document.addEventListener('mousemove', (e) => {
+        const shapes = document.querySelectorAll('.parallax-shape');
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const mouseX = e.clientX - centerX;
+        const mouseY = e.clientY - centerY;
+
+        shapes.forEach(shape => {
+          const speed = parseFloat(shape.dataset.speed) || 0.02;
+          const x = (mouseX * speed);
+          const y = (mouseY * speed);
+          shape.style.transform = `translate(${x}px, ${y}px)`;
+        });
+      });
+
+      // Navigation Progress Dots
+      const sections = ['hero', 'about', 'stack', 'projects', 'contact'];
+      const navDots = document.querySelectorAll('.nav-dot');
+
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navDots.forEach(dot => {
+              dot.classList.remove('active');
+              if (dot.getAttribute('href') === `#${id}`) {
+                dot.classList.add('active');
+              }
+            });
+          }
+        });
+      }, { threshold: 0.5 });
+
+      sections.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) navObserver.observe(section);
       });
     });
   </script>
