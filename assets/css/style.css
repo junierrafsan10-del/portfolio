@@ -1,0 +1,28 @@
+/* গুগল থেকে একটি পশ ফন্ট নিয়ে আসা */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa; /* হালকা অফ-হোয়াইট ব্যাকগ্রাউন্ড */
+}
+
+html {
+    scroll-behavior: smooth; /* স্ক্রলিং মাখনের মতো হবে */
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px); /* মাউস নিলে কার্ড ৮ পিক্সেল উপরে উঠবে */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important; /* চারপাশ সুন্দর কালো ছায়া */
+}
+
+.progress {
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+.progress-bar {
+    border-radius: 10px;
+}
