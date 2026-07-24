@@ -1,0 +1,28 @@
+/*
+ * clock.js — Live date & time display for the footer.
+ * This is the ONLY JavaScript in the entire project.
+ */
+(function () {
+  "use strict";
+
+  function updateClock() {
+    var el = document.getElementById("live-clock");
+    if (!el) return;
+
+    var now = new Date();
+    var options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZoneName: "short",
+    };
+    el.textContent = now.toLocaleDateString("en-US", options);
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+})();

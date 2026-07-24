@@ -1,0 +1,164 @@
+/*
+ * Portfolio — Custom Styles
+ * Minor tweaks on top of Bootstrap 5 defaults.
+ */
+
+/* ── Root variables ── */
+:root {
+  --primary-color: #2c3e50;
+  --accent-color: #e67e22;
+  --accent-hover: #d35400;
+  --light-bg: #f8f9fa;
+  --dark-bg: #1a252f;
+}
+
+/* ── Global ── */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  color: #333;
+}
+
+/* ── Navbar hover effect ── */
+.navbar-nav .nav-link {
+  position: relative;
+  transition: color 0.2s;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: all 0.3s;
+  transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 70%;
+}
+
+/* ── Section headings ── */
+.section-heading {
+  position: relative;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.section-heading::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  margin: 0.6rem auto 0;
+}
+
+/* ── Hero / page banner ── */
+.page-banner {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+  color: #fff;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+/* ── Cards ── */
+.card {
+  border: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Carousel ── */
+.carousel-item img {
+  height: 420px;
+  object-fit: cover;
+}
+
+/* ── Buttons ── */
+.btn-accent {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+}
+
+.btn-accent:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+}
+
+.btn-outline-accent {
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
+}
+
+.btn-outline-accent:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/* ── Footer hover effect ── */
+footer a {
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: var(--accent-color) !important;
+}
+
+/* ── Service card icon ── */
+.service-icon {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+}
+
+/* ── Skills progress bars ── */
+.progress {
+  height: 1.4rem;
+  border-radius: 8px;
+}
+
+.progress-bar {
+  background-color: var(--accent-color);
+  font-size: 0.8rem;
+  line-height: 1.4rem;
+}
+
+/* ── Testimonial card ── */
+.testimonial-card {
+  background: #fff;
+  border-left: 4px solid var(--accent-color);
+}
+
+/* ── Footer ── */
+footer {
+  background-color: var(--dark-bg);
+  color: #ccc;
+}
+
+/* ── Spacing helpers ── */
+.section-pad {
+  padding: 4rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 576px) {
+  .carousel-item img {
+    height: 240px;
+  }
+  .page-banner {
+    padding: 2.5rem 0;
+  }
+}
